@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Plenger Space</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css"/>
+    <style>
+        body {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            overflow-x: hidden;
+        }
+        .glass {
+            background: rgba(255, 255, 255, 0.15);
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            border-radius: 20px;
+        }
+        .particle {
+            position: absolute;
+            background: rgba(255, 255, 255, 0.5);
+            border-radius: 50%;
+            pointer-events: none;
+        }
+    </style>
+</head>
+<body class="min-h-screen flex flex-col items-center justify-center p-4">
+
+    <div class="glass p-10 text-center animate__animated animate__zoomIn shadow-2xl z-10">
+        <h1 class="text-6xl font-bold text-white tracking-tighter">
+            ple<span class="inline-block animate__animated animate__heartBeat animate__infinite">💜</span>
+        </h1>
+        <h1 class="text-6xl font-bold text-white tracking-tighter">
+            nger<span class="inline-block animate__animated animate__heartBeat animate__infinite" style="animation-delay: 0.5s">💜</span>
+        </h1>
+        
+        <div class="mt-8 w-72 md:w-96">
+            <div id="chat-box" class="h-48 overflow-y-auto text-left p-3 bg-white/10 rounded-lg mb-3 text-white text-sm">
+                <p><i>Sistem: Memulai obrolan...</i></p>
+            </div>
+            <div class="flex gap-2">
+                <input type="text" id="msg-input" class="flex-1 bg-white/20 border-none rounded-full px-4 py-2 text-white placeholder-white/50 focus:outline-none focus:ring-2 focus:ring-purple-300" placeholder="Ketik pesan...">
+                <button id="send-btn" class="bg-purple-600 hover:bg-purple-500 text-white px-4 py-2 rounded-full transition">Kirim</button>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        function createParticle() {
+            const p = document.createElement('div');
+            p.classList.add('particle');
+            const size = Math.random() * 5 + 2 + 'px';
+            p.style.width = size;
+            p.style.height = size;
+            p.style.top = Math.random() * 100 + 'vh';
+            p.style.left = Math.random() * 100 + 'vw';
+            p.style.opacity = Math.random();
+            document.body.appendChild(p);
+            
+            setTimeout(() => { p.remove(); }, 5000);
+        }
+        setInterval(createParticle, 200);
+    </script>
+    <script type="module" src="firebase.js"></script>
+</body>
+</html>
